@@ -41,7 +41,20 @@ const AddNewBooksComponent = () => {
   const { bookName, authorName, ISBN, genre } = bookInfo;
 
   const formSubmitHandler = (event) => {
+    event.preventDefault()
     
+    axios
+      .post(`http://localhost:3500/api/v1/books`, bookInfo)
+      .then(response => {
+        alert(`${response.data.bookName} is added successfully`)
+        window.location.href = '/'
+      })
+      .catch(error => {
+        if(error.response)
+          {
+            alert(`Status ${error.response.status} - ${error.response.message}`)
+          }
+      })
   }
 
 

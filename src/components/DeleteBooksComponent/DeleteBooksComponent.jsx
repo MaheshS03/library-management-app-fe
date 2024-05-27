@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './EditBooksComponent.css';
+import './DeleteBooksComponent.css';
 import axios from 'axios';
 
-const EditBooksComponent = () => {
+const DeleteBooksComponent = () => {
   const [bookInfo, setBookInfo] = useState({
     bookName: '',
     authorName: '',
@@ -61,9 +61,9 @@ const EditBooksComponent = () => {
     event.preventDefault()
 
     axios
-      .patch(`http://localhost:3500/api/v1/books/`, bookInfo)
+      .delete(`http://localhost:3500/api/v1/books`, {data:bookInfo})
       .then(response => {
-        alert(`${bookInfo.bookName} is updated successfully`)
+        alert(`${bookInfo.bookName} is deleted successfully`)
         window.location.href = '/'
       })
       .catch(error => {
@@ -132,10 +132,10 @@ const EditBooksComponent = () => {
       </div>
 
       <div>
-        <button type="submit">Update</button>
+        <button type="submit">Delete</button>
       </div>
     </form>
   );
 };
 
-export default EditBooksComponent;
+export default DeleteBooksComponent;
